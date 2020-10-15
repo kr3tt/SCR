@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo apt update && sudo apt install -y mutt
+
+path=$(pwd)/pliki
+
+for mail in $(cat $path/adresy.txt)
+do
+        cat $path/contents.txt | mutt -s "PCV" $mail -a $path/spec*.pdf
+done
