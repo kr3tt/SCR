@@ -1,0 +1,9 @@
+#!/bin/bash
+
+dzien=$(date +%w)
+
+if [ $dzien = 0 ] || [ $dzien = 6 ]; then
+        echo "Weekend"
+else
+        echo "Dzien roboczy"
+fi
