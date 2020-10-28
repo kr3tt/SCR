@@ -1,0 +1,9 @@
+#!/bin/bash
+
+trap "" SIGFPE
+
+while true;
+do
+        date
+        sleep 2
+done
