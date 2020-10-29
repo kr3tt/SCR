@@ -1,0 +1,15 @@
+#!/bin/bash
+
+while true;
+do
+        cat fifo
+done
+
+////////////////
+
+#!/bin/bash
+
+while true;
+do
+        echo "tekst " > fifo
+done
