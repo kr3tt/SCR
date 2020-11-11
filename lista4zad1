@@ -1,0 +1,7 @@
+#!/bin/bash
+NUM=0
+while true;
+do
+  NUM=NUM+1
+  sleep 1
+done
