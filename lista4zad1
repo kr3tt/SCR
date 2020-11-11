@@ -5,3 +5,5 @@ do
   NUM=NUM+1
   sleep 1
 done
+
+# top -d 0.1 - odswiezanie co 0.1 sekundy (przyklad)
