@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     if(pid == 0) { // dziecko
         close(fd[1]);
         close(0); // zamyka mozliwosc czytania z std wejscia
-        dup(fd[0]); // przekierowanie potoku na std wyjscie
+        dup(fd[0]); // tworzy duplikat deskryptora pliku i przekazuje numer tego deskryptora
         close(fd[0]);
 
         execlp("display", "display", "-", NULL);
