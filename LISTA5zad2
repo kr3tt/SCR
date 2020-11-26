@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
         dup(fd[0]); // tworzy duplikat deskryptora pliku i przekazuje numer tego deskryptora
         close(fd[0]);
 
-        execlp("display", "display", "-", NULL);
+        execlp("display", "display", "-", NULL); // wykonuje komende
     }
     else { // rodzic
         close(fd[0]);
