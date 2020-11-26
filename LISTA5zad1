@@ -10,14 +10,14 @@ int main(int argc, char *argv[]) {
     int fd[2], myFile, n;
     char buf[size];
 
-    if(pipe(fd)<0)
+    if(pipe(fd) < 0)
         {
         fprintf(stderr, "eror\n");
         }
 
     pid = fork();
 
-    if(pid==0)
+    if(pid == 0) // dziecko
         {
         close(fd[1]);
         while(read(fd[0],&buf,1)>0)
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
             close(fd[0]);
         }
 
-    else if(pid>0)
+    else if(pid > 0) // rodzic
     {
         close(fd[0]);
         if((myFile=open(argv[1],O_RDONLY))<0)
@@ -39,9 +39,9 @@ int main(int argc, char *argv[]) {
             return 2;
             }
 
-    while ((n= read(myFile, &buf, size))>0){
-        if(write(fd[1],&buf,n)<0){
-            fprintf(stderr,"eror\n");
+    while ((n = read(myFile, &buf, size)) > 0){
+        if(write(fd[1], &buf, n) < 0){
+            fprintf(stderr, "eror\n");
             return 3;
             }
 
