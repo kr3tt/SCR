@@ -22,7 +22,7 @@ int main()
 
         fstat(fd, &struct_stat); // obliczenie wielkosci pliku (struct_stat.st_size)
         ftruncate(fd_memory, struct_stat.st_size); // obcięcie pliku do konkretnej długości
-        address = (char *)mmap(NULL, struct_stat.st_size, PROT_WRITE | PROT_READ, MAP_SHARED, fd_memory, 0); // mapowanie, NULL - sam dobiera adres, prot_write/read - czytaj pisz, 
+        address = (char *)mmap(NULL, struct_stat.st_size, PROT_WRITE | PROT_READ, MAP_SHARED, fd_memory, 0); // mapowanie, NULL - sam dobiera adres, na podstawie file descryptora, prot_write/read - czytaj pisz, 
         read(fd, address, struct_stat.st_size); // czyta plik z fd do adresu
         msync(address, struct_stat.st_size, MS_ASYNC); // synchronizuje plik z wynikiem mapowania
         close(fd);
