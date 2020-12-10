@@ -9,21 +9,22 @@
 int main()
 {
     char fileName[100];
-    int fd, fd_memory, size;
-    char *addres = NULL;
+    int fd, fd_memory, size; // file descriptor pliku i pamięci
+    struct stat struct_stat;
+    char *address = NULL;
     while (1)
     {
         printf("Podaj nazwe pliku: ");
         scanf("%s", fileName);
         fd = open(fileName, O_RDWR);
         
-        fd_memory = open("memory", O_CREAT | O_RDWR);
+        fd_memory = open("memory", O_CREAT | O_RDWR); // stworz -> czytaj/pisz do pliku
 
-        size = lseek(fd, 0, SEEK_END);
-        ftruncate(fd_memory, size);
-        address = (char *)mmap(NULL, size, PROT_WRITE | PROT_READ, MAP_SHARED, fd_memory, 0);
-        read(fd, address, size);
-        msync(address, size, MS_ASYNC);
+        fstat(fd, &struct_stat); // obliczenie wielkosci pliku (struct_stat.st_size)
+        ftruncate(fd_memory, struct_stat.st_size); // obcięcie pliku do konkretnej długości
+        address = (char *)mmap(NULL, struct_stat.st_size, PROT_WRITE | PROT_READ, MAP_SHARED, fd_memory, 0); // mapowanie, NULL - sam dobiera adres, prot_write/read - czytaj pisz, 
+        read(fd, address, struct_stat.st_size); // czyta plik z fd do adresu
+        msync(address, struct_stat.st_size, MS_ASYNC); // synchronizuje plik z wynikiem mapowania
         close(fd);
         close(fd_memory);
     }
